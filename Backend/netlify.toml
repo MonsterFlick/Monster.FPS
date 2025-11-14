@@ -1,0 +1,13 @@
+[build]
+  functions = "netlify/functions"
+  publish = "public"
+
+[[redirects]]
+  from = "/api/downloads/*"
+  to = "/.netlify/functions/download"
+  status = 200
+
+[[redirects]]
+  from = "/api/meta/history"
+  to = "/.netlify/functions/history"
+  status = 200
