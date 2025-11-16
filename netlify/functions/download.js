@@ -1,7 +1,26 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 
-const logPath = path.resolve("logs", "download-history.json");
+// Prefer the project `logs/` folder when running locally (writable),
+// but serverless environments have a read-only bundle. Fall back to
+// the runtime temp directory (usually `/tmp`) when needed.
+const origLogPath = path.resolve("logs", "download-history.json");
+let logPath;
+try {
+  // Ensure the logs dir exists and is writable
+  fs.mkdirSync(path.dirname(origLogPath), { recursive: true });
+  fs.accessSync(path.dirname(origLogPath), fs.constants.W_OK);
+  logPath = origLogPath;
+} catch (err) {
+  const tmpLogsDir = path.join(os.tmpdir(), "monster-fps-logs");
+  try {
+    fs.mkdirSync(tmpLogsDir, { recursive: true });
+  } catch (e) {
+    // ignore
+  }
+  logPath = path.join(tmpLogsDir, "download-history.json");
+}
 
 
 function load(file) {
@@ -17,7 +36,12 @@ function load(file) {
   
 
 function save(file, data) {
-  fs.writeFileSync(file, JSON.stringify(data, null, 2));
+  try {
+    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+  } catch (err) {
+    // Don't let logging failures break the download response in production.
+    console.warn("Failed to write download history:", err && err.message);
+  }
 }
 
 export const handler = async (event, context) => {
