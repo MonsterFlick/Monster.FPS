@@ -1,0 +1,95 @@
+/* MonsterFPS Main Styles */
+
+body{
+    margin:0;
+    padding:0;
+    background:#000;
+    color:#fff;
+    font-family:'Montserrat',sans-serif;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+.l-header{
+    position:fixed;
+    top:0;left:0;width:100%;
+    background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(8px);
+    z-index:100;
+    padding:15px 0;
+}
+.nav{
+    width:92%;margin:auto;
+    display:flex;justify-content:space-between;align-items:center;
+}
+.nav__logo{
+    font-size:26px;
+    font-weight:800;
+    background:linear-gradient(90deg,#ff6b6b,#ffb86b);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.nav__list{display:flex;gap:25px;list-style:none;}
+.nav__link{
+    color:#fff;font-weight:600;
+    transition:.2s;
+}
+.nav__link:hover{color:#ffb86b;}
+
+/* HOME */
+.home{
+    width:100%;height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    background:radial-gradient(circle at top,#1a1a1a,#000);
+}
+.home__container{
+    width:90%;max-width:1200px;
+    display:grid;grid-template-columns:1fr 1fr;
+    align-items:center;
+}
+.home__title{
+    font-size:6rem;line-height:.9;font-weight:900;
+}
+.home__title span{
+    background:linear-gradient(90deg,#ff6b6b,#ffb86b);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.download-btn{
+    margin-top:20px;
+    display:inline-flex;align-items:center;gap:12px;
+    background:linear-gradient(90deg,#ff6b6b,#ffb86b);
+    color:#000;padding:12px 22px;border-radius:12px;
+    font-weight:800;font-size:1.1rem;
+    box-shadow:0 10px 25px rgba(255,107,107,0.25);
+    transform:translateY(0);
+    transition:.2s;
+}
+.download-btn:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(255,107,107,0.35);
+}
+.home__img{
+    width:420px;filter:drop-shadow(0 12px 40px rgba(255,107,107,0.25));
+    transform:translateY(0);
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-14px)}
+    100%{transform:translateY(0)}
+}
+
+/* FOOTER */
+.footer{background:#000;padding:60px 0;margin-top:100px;}
+.footer__container{
+    width:90%;margin:auto;
+    display:grid;gap:40px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
+.footer__title{color:#fff;font-weight:700;margin-bottom:12px;}
+.footer__link{color:#ffb86b;}
+.about__social-icon{color:#fff;font-size:26px;margin-right:12px;}
+.about__social-icon:hover{color:#ffb86b;}

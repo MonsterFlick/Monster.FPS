@@ -1,3 +1,3 @@
 
-Backend/.netlify/
-Backend/node_modules/
+.netlify/
+node_modules/
