@@ -1,10 +1,13 @@
 @echo off
 set version=1.0
 setlocal enabledelayedexpansion
+mode con cols=211f lines=999
+
 chcp 65001
 TITLE Preparing...
-call :IsAdmin
+call :IsAdmin || exit /b
 :start
+call :IsAdmin || exit /b
 if exist c:\resources goto main
 md c:\resources
 md C:\Users\%username%\Desktop\Revert
@@ -18,7 +21,7 @@ reg export HKU  C:\Users\%username%\Desktop\Revert\HKU.reg >nul
 reg export HKCC C:\Users\%username%\Desktop\Revert\HKCC.reg >nul
 
 :main
-color 06
+color 0C
 for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (
   set "DEL=%%a"
 )
@@ -27,57 +30,34 @@ cls
 echo.
 echo.
 echo.
-eecho.
 echo.
 echo.
 echo.
 echo.
 echo.
-echo.                          ████  ████  ████  ████  ████
-echo.                          ████  ████  ████  ████  ████
-echo.                       ████   ████   ████   ████   ████
-echo.                     ████   ████   ████   ████   ████
-echo.                   ████   ████   ████   ████   ████
-echo.                 ████        MONSTERFPS CONTROL PANEL
-echo.                   ████   ████   ████   ████   ████
-echo.                     ████   ████   ████   ████   ████
-echo.                       ████   ████   ████   ████   ████
-echo.                          ████  ████  ████  ████  ████
-echo.                          ████  ████  ████  ████  ████
 echo.
-echo.
-echo.
+call :PrintLogo
 
-echo. 
-call :ColorText 06 "                         [ "
+echo.
+echo.
+rem Centered main options (aligned under logo)
+call :ColorText 0C "                                     [ "
 call :ColorText F " 1 "
-call :ColorText 06 " ] "
-call :ColorText F " Tweaks "
-call :ColorText 06 "                                                  [ "
+call :ColorText 0C " ] "
+call :ColorText F " Tweaks"
+echo.
+call :ColorText 0C "                                     [ "
 call :ColorText F " 2 "
-call :ColorText 06 " ] "
-call :ColorText F " About "
+call :ColorText 0C " ] "
+call :ColorText F " About"
 echo.
-echo.
-
-call :ColorText 06 "                         [ "
+call :ColorText 0C "                                     [ "
 call :ColorText F " 3 "
-call :ColorText 06 " ] "
-call :ColorText F " Policies "
+call :ColorText 0C " ] "
+call :ColorText F " Policies"
 echo.
 echo.
-
-call :ColorText 06 "                                                        [ "
-call :ColorText F " 4 "
-call :ColorText 06 " ] "
-call :ColorText F " Credits "
-echo.
-echo.
-echo.
-
-call :ColorText 8 "                                                      [ press X to close ]"
-echo.
-echo.
+call :ColorText 8 "                                     [ press X to close ]"
 echo.
 
 set /p choice="Select a corresponding number to what you'd like > "
@@ -85,7 +65,6 @@ set /p choice="Select a corresponding number to what you'd like > "
 if /i "%choice%"=="1" goto Tweaks
 if /i "%choice%"=="2" goto About
 if /i "%choice%"=="3" goto Policies
-if /i "%choice%"=="4" goto Credits
 if /i "%choice%"=="X" goto Close
 
 SET PlaceMisspelt=Main
@@ -94,7 +73,7 @@ goto MissSpell
 
 
 :Tweaks
-color 06
+color 0C
 cls
 echo.
 echo.
@@ -105,70 +84,47 @@ echo.
 echo.
 echo.
 echo.
-echo.                          ████  ████  ████  ████  ████
-echo.                          ████  ████  ████  ████  ████
-echo.                       ████   ████   ████   ████   ████
-echo.                     ████   ████   ████   ████   ████
-echo.                   ████   ████   ████   ████   ████
-echo.                 ████        MONSTERFPS CONTROL PANEL
-echo.                   ████   ████   ████   ████   ████
-echo.                     ████   ████   ████   ████   ████
-echo.                       ████   ████   ████   ████   ████
-echo.                          ████  ████  ████  ████  ████
-echo.                          ████  ████  ████  ████  ████
-echo.
-echo.
-echo.
+call :PrintLogo
 
-echo. 
-echo. 
-call :ColorText 06 "                         [ "
+echo.
+echo.
+rem Centered tweaks options
+call :ColorText 0C "                                     [ "
 call :ColorText F " 1 "
-call :ColorText 06 " ] "
-call :ColorText F " Power Plan "
-call :ColorText 06 "                                  [ "
+call :ColorText 0C " ] "
+call :ColorText F " Power Plan"
+echo.
+call :ColorText 0C "                                     [ "
 call :ColorText F " 2 "
-call :ColorText 06 " ] "
-call :ColorText F " Services Optimization "
+call :ColorText 0C " ] "
+call :ColorText F " Services Optimization"
 echo.
-echo.
-echo.
-
-call :ColorText 06 "                         [ "
+call :ColorText 0C "                                     [ "
 call :ColorText F " 3 "
-call :ColorText 06 " ] "
-call :ColorText F " Internet Tweaks "
-call :ColorText 06 "                             [ "
+call :ColorText 0C " ] "
+call :ColorText F " Internet Tweaks"
+echo.
+call :ColorText 0C "                                     [ "
 call :ColorText F " 4 "
-call :ColorText 06 " ] "
-call :ColorText F " Debloat "
+call :ColorText 0C " ] "
+call :ColorText F " Debloat"
 echo.
-echo.
-echo.
-
-call :ColorText 06 "                         [ "
+call :ColorText 0C "                                     [ "
 call :ColorText F " 5 "
-call :ColorText 06 " ] "
-call :ColorText F " Disable Services "
-call :ColorText 06 "                           [ "
+call :ColorText 0C " ] "
+call :ColorText F " Disable Services"
+echo.
+call :ColorText 0C "                                     [ "
 call :ColorText F " 6 "
-call :ColorText 06 " ] "
-call :ColorText F " Affinity "
+call :ColorText 0C " ] "
+call :ColorText F " Affinity"
 echo.
-echo.
-echo.
-
-call :ColorText 4 "                                                       [ "
+call :ColorText 4 "                                     [ "
 call :ColorText 4 " 7 "
 call :ColorText 4 " ] "
-call :ColorText 4 " Revert "
+call :ColorText 4 " Revert"
 echo.
-echo.
-echo.
-
-call :ColorText 8 "                                                    [ press X to go back ]"
-echo.
-echo.
+call :ColorText 8 "                                     [ press X to go back ]"
 echo.
 
 set /p choice="            Select a corresponding number to what you'd like > "
@@ -223,15 +179,14 @@ echo.
 echo.
 set /p choice= "> "
 if /i "%choice%"=="X" goto Main
-) ELSE (
 SET PlaceMisspelt=Policies
 goto MissSpell
-)
+
 
 
 
 :PowerPlan
-color 06
+color 0C
 cls
 echo ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
 echo ║                                                          Power Plan                                                               ║
@@ -265,10 +220,9 @@ echo ╚════════════════════════
 set /p choice="Y or N >  "
 if /i "%choice%"=="Y" goto ContinuePowerPlan
 if /i "%choice%"=="N" goto Tweaks
-) ELSE (
 SET PlaceMisspelt=PowerPlan
 goto MissSpell
-)
+
 
 :ContinuePowerPlan
 cls
@@ -276,10 +230,9 @@ echo delete default windows powerplans? (recommended) Y or N
 set /p choice="> "
 if /i "%choice%"=="Y" goto delete
 if /i "%choice%"=="N" goto keep
-) ELSE (
 SET PlaceMisspelt=ContinuePowerPlan
 goto MissSpell
-)
+
 
 
 :keep
@@ -344,10 +297,9 @@ echo ╚════════════════════════
 set /p choice="Y or N >  "
 if /i "%choice%"=="Y" goto ContinueServicesOptimization
 if /i "%choice%"=="N" goto Tweaks
-) ELSE (
 SET PlaceMisspelt=ServicesOptimization
 goto MissSpell
-)
+
 
 :ContinueServicesOptimization
 cls
@@ -392,10 +344,9 @@ echo ╚════════════════════════
 set /p choice="Y or N >  "
 if /i "%choice%"=="Y" goto ContinueCleaner
 if /i "%choice%"=="N" goto Tweaks
-) ELSE (
 SET PlaceMisspelt=Cleaner
 goto MissSpell
-)
+
 
 :ContinueCleaner
 powershell Invoke-WebRequest "https://monsterfps.netlify.app/api/downloads/DeviceCleanup.exe" -Outfile "c:\resources\Device_cleanup.exe" >nul
@@ -419,37 +370,28 @@ echo.
 echo.
 echo.
 echo.
-echo.                          ████  ████  ████  ████  ████
-echo.                          ████  ████  ████  ████  ████
-echo.                       ████   ████   ████   ████   ████
-echo.                     ████   ████   ████   ████   ████
-echo.                   ████   ████   ████   ████   ████
-echo.                 ████        MONSTERFPS CONTROL PANEL
-echo.                   ████   ████   ████   ████   ████
-echo.                     ████   ████   ████   ████   ████
-echo.                       ████   ████   ████   ████   ████
-echo.                          ████  ████  ████  ████  ████
-echo.                          ████  ████  ████  ████  ████
-echo.                          
-echo. 
-echo. 
-echo. 
-call :ColorText 06 "          [ "
+call :PrintLogo
+echo.
+echo.
+rem Centered internet options
+call :ColorText 0C "                                     [ "
 call :ColorText F " 1 "
-call :ColorText 06 " ] " 
-call :ColorText F " Disable Nagles Algorithm "
-call :ColorText 06 "          [ "
+call :ColorText 0C " ] "
+call :ColorText F " Disable Nagles Algorithm"
+echo.
+call :ColorText 0C "                                     [ "
 call :ColorText F " 2 "
-call :ColorText 06 " ] " 
-call :ColorText F " General Optimizations "
-call :ColorText 06 "          [ "
+call :ColorText 0C " ] "
+call :ColorText F " General Optimizations"
+echo.
+call :ColorText 0C "                                     [ "
 call :ColorText F " 3 "
-call :ColorText 06 " ] " 
-call :ColorText F " Winsock Optimizations "
+call :ColorText 0C " ] "
+call :ColorText F " Winsock Optimizations"
 echo.
 echo.
 echo.
-call :ColorText 8 "                                                      [ press X to go back ]"
+call :ColorText 8 "                                     [ press X to go back ]"
 echo.
 echo.
 echo.
@@ -458,10 +400,9 @@ if /i "%choice%"=="1" goto Nagle
 if /i "%choice%"=="2" goto General
 if /i "%choice%"=="3" goto Winsock
 if /i "%choice%"=="X" goto Tweaks
-) ELSE (
 SET PlaceMisspelt=Internet
 goto MissSpell
-)
+
 
 
 
@@ -500,10 +441,9 @@ echo ╚════════════════════════
 set /p choice="Y or N >  "
 if /i "%choice%"=="Y" goto ContinueNagle
 if /i "%choice%"=="N" goto Internet
-) ELSE (
 SET PlaceMisspelt=Nagle
 goto MissSpell
-)
+
 
 :ContinueNagle
 for /f "tokens=3*" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards" /f "ServiceName" /s^|findstr /i /l "ServiceName"') do (
@@ -612,10 +552,9 @@ echo ╚════════════════════════
 set /p choice="Y or N >  "
 if /i "%choice%"=="Y" goto ContinueWinsock
 if /i "%choice%"=="N" goto Internet
-) ELSE (
 SET PlaceMisspelt=Winsock
 goto MissSpell
-)
+
 
 :ContinueWinsock
 netsh winsock reset catalog >nul  
@@ -671,10 +610,9 @@ echo ╚════════════════════════
 set /p choice="Y or N >  "
 if /i "%choice%"=="Y" goto ContinueDebloat
 if /i "%choice%"=="N" goto Tweaks
-) ELSE (
 SET PlaceMisspelt=Debloat
 goto MissSpell
-)
+
 
 :ContinueDebloat
 cls
@@ -809,10 +747,8 @@ echo ╚════════════════════════
 set /p choice="Y or N >  "
 if /i "%choice%"=="Y" goto ContinueServiceDisable
 if /i "%choice%"=="N" goto Tweaks
-) ELSE (
 SET PlaceMisspelt=ServiceDisable
 goto MissSpell
-)
 
 :ContinueServiceDisable
 cls
@@ -903,10 +839,9 @@ echo ╚════════════════════════
 set /p choice="Y or N >  "
 if /i "%choice%"=="Y" goto ContinueAffinity
 if /i "%choice%"=="N" goto Tweaks
-) ELSE (
 SET PlaceMisspelt=Affinity
 goto MissSpell
-)
+
 
 :ContinueAffinity
 for /f "tokens=*" %%f in ('wmic cpu get NumberOfCores /value ^| find "="') do set %%f
@@ -925,13 +860,11 @@ pause
 
 :CheckAmountOfCoresHT
 if "%NumberOfCores%"=="4" goto 4coresHTEnabled
-) else (
 goto MoreThan4
-)
+
 
 :CheckAmountOfCores
 if "%NumberOfCores%"=="4" goto 4coresHTDisabled
-) else (
 goto MoreThan4
 
 :4coresHTEnabled
@@ -1052,27 +985,68 @@ findstr /v /a:%1 /R "^$" "%~2" nul
 del "%~2" > nul  
 goto :eof
 
+
+:PrintLogo
+cls
+setlocal enabledelayedexpansion
+
+set "pad=                                     "
+
+rem frames for pulsating intro
+for %%A in (1 2 3 2) do (
+    cls
+    echo.
+    echo.
+
+    rem horizontal shift for “pulse”
+    if %%A==1 set "shift=      "
+    if %%A==2 set "shift=   "
+    if %%A==3 set "shift="
+
+    echo.!pad!!shift! 
+    echo.!pad!!shift!  ██████   ██████                              █████                       ███████████ ███████████   █████████ 
+    echo.!pad!!shift! ▒▒██████ ██████                              ▒▒███                       ▒▒███▒▒▒▒▒▒█▒▒███▒▒▒▒▒███ ███▒▒▒▒▒███
+    echo.!pad!!shift!  ▒███▒█████▒███   ██████  ████████    █████  ███████    ██████  ████████  ▒███   █ ▒  ▒███    ▒███▒███    ▒▒▒ 
+    echo.!pad!!shift!  ▒███▒▒███ ▒███  ███▒▒███▒▒███▒▒███  ███▒▒  ▒▒▒███▒    ███▒▒███▒▒███▒▒███ ▒███████    ▒██████████ ▒▒█████████ 
+    echo.!pad!!shift!  ▒███ ▒▒▒  ▒███ ▒███ ▒███ ▒███ ▒███ ▒▒█████   ▒███    ▒███████  ▒███ ▒▒▒  ▒███▒▒▒█    ▒███▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒███
+    echo.!pad!!shift!  ▒███      ▒███ ▒███ ▒███ ▒███ ▒███  ▒▒▒▒███  ▒███ ███▒███▒▒▒   ▒███      ▒███  ▒     ▒███         ███    ▒███
+    echo.!pad!!shift!  █████     █████▒▒██████  ████ █████ ██████   ▒▒█████ ▒▒██████  █████     █████       █████       ▒▒█████████ 
+    echo.!pad!!shift! ▒▒▒▒▒     ▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒▒     ▒▒▒▒▒   ▒▒▒▒▒▒  ▒▒▒▒▒     ▒▒▒▒▒       ▒▒▒▒▒         ▒▒▒▒▒▒▒▒▒  
+    echo.!pad!!shift!                                                                                                                
+    echo.
+    echo.!pad!!shift!                                                     MONSTER FPS
+
+
+    timeout /t 1 >nul
+)
+
+endlocal
+goto :eof
+
+
 :Close
 del C:\Resources\ /S /Q /F
 exit
 
 
-:IsAdmin
-REG ADD HKLM /F >nul
+    :IsAdmin
+    REG ADD HKLM /F >nul
 
-IF %ERRORLEVEL%==0 (
-    goto start
-) ELSE (
-cls
-     cls
+    IF %ERRORLEVEL%==0 (
+      exit /b 0
+    )
+
+    cls
     TITLE NOT RUNNING AS ADMIN
     echo.
     echo   You need to run this script as Administrator.
     echo.
-    echo   Right-click → "Run as administrator"
+    echo   Right-click -> "Run as administrator"
     echo.
-pause
-)
+    pause
+    exit /b 1
+
+
 
 :MissSpell
 cls
